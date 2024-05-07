@@ -24,7 +24,7 @@ jobs:
       run: npm install
 
     - name: Build Project
-      run: ng build --prod --base-href "https://th1230.github.io/test-github-action/"
+      run: ng build --configuration=production --base-href "https://th1230.github.io/test-github-action/"
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
