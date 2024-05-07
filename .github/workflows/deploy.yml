@@ -31,3 +31,10 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist/test-github-action  # 指定您的構建輸出目錄
+
+    - name: Deploy to Render
+      run: |
+        curl -X POST -H "Authorization: Bearer ${{ secrets.RENDER_TOKEN }}" \
+        -H "Content-Type: application/json" \
+        -d '{}' \
+        ${{ secrets.RENDER_DEPLOY_HOOK }}
