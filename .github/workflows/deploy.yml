@@ -1,0 +1,30 @@
+﻿name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 觸發工作流程的分支
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'  # 指定 Node.js 版本
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Project
+      run: ng build --prod --base-href "https://th1230.github.io/test-github-action/"
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist/my-app  # 指定您的構建輸出目錄
